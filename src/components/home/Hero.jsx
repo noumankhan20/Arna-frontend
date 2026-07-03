@@ -256,7 +256,7 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="relative z-20 h-full flex items-end pb-16 md:pb-28 lg:pb-36 pt-20">
+      <div className="relative z-20 h-full flex items-end pb-6 md:pb-10 lg:pb-14 pt-20">
         <div className="container mx-auto px-6 md:px-12">
           <div className="max-w-xl lg:max-w-3xl text-white text-left">
             <h1
@@ -273,7 +273,11 @@ export default function Hero() {
               {currentSlides[active]?.text}
             </p>
 
-            <div ref={buttonsRef} className="flex flex-row items-center justify-start gap-2 sm:gap-4 mb-8 md:mb-12">
+            {/* Buttons first */}
+            <div
+              ref={buttonsRef}
+              className="flex flex-row items-center justify-start gap-2 sm:gap-4 mb-6 md:mb-8"
+            >
               <Link
                 href="/products"
                 className="w-auto group px-5 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 bg-emerald-500 text-white font-bold text-xs sm:text-base rounded-xl transition-all hover:bg-[#8e5d4d] hover:scale-105 shadow-xl hover:shadow-[#b77f6b]/20 flex items-center justify-center whitespace-nowrap"
@@ -288,20 +292,20 @@ export default function Hero() {
               </Link>
             </div>
 
+            {/* Dots (the "4 lines") below the buttons */}
             <div className="flex items-center justify-start gap-4">
               <div className="flex gap-4">
                 {currentSlides.map((_, i) => (
                   <div
                     key={i}
                     className={`h-1 rounded-full transition-all duration-700 ${i === active
-                      ? 'w-16 bg-[#b77f6b] shadow-lg shadow-[#b77f6b]/50'
-                      : 'w-8 bg-white/30'
+                        ? 'w-16 bg-[#b77f6b] shadow-lg shadow-[#b77f6b]/50'
+                        : 'w-8 bg-white/30'
                       }`}
                   />
                 ))}
               </div>
 
-              {/* Pause Indicator */}
               {isPaused && (
                 <div className="ml-4 flex items-center gap-2 text-white/60 text-[10px] uppercase tracking-widest animate-pulse">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#b77f6b]" />
