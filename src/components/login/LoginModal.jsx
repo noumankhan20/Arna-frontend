@@ -7,7 +7,13 @@ import { useGoogleLoginMutation, useLoginMutation, useSignupMutation } from "@/r
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { createPortal } from "react-dom";
 export default function LoginModal({ isOpen, onClose, redirectPath = "/profile" }) {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const [mode, setMode] = useState("login"); // 'login' or 'signup'
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
@@ -148,7 +154,9 @@ export default function LoginModal({ isOpen, onClose, redirectPath = "/profile" 
         return () => window.removeEventListener("keydown", handleEsc);
     }, [onClose]);
 
-    return (
+    if (!mounted) return null;
+
+    return createPortal(
         <AnimatePresence>
             {isOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -176,7 +184,7 @@ export default function LoginModal({ isOpen, onClose, redirectPath = "/profile" 
                             <X className="w-5 h-5" />
                         </button>
 
-                        <div className="p-6 sm:p-10 overflow-y-auto">
+                        <div className="p-6 sm:p-10 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                             <div className="text-center mb-6">
                                 <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 mb-1">
                                     {mode === "login" ? "Welcome Back" : "Create Account"}
@@ -351,6 +359,7 @@ export default function LoginModal({ isOpen, onClose, redirectPath = "/profile" 
                     </motion.div>
                 </div>
             )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
     );
 }
