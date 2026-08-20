@@ -63,7 +63,7 @@ export default function Hero() {
         };
       });
 
-      console.log("Matched Backend Slides:", backendSlides);
+      // console.log("Matched Backend Slides:", backendSlides);
       setCurrentSlides(backendSlides);
     } else if (apiData?.success && apiData?.data?.length === 0) {
       console.warn("API succeeded but returned 0 slides. Falling back to defaults.");
