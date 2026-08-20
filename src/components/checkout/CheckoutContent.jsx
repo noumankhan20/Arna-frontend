@@ -82,8 +82,8 @@ export default function CheckoutContent() {
     const subtotal = +cartItems.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2);
     const shippingCharge = 150;
     const taxableAmount = +(subtotal + shippingCharge).toFixed(2);
-    const cgst = +(taxableAmount * 0.09).toFixed(2);
-    const sgst = +(taxableAmount * 0.09).toFixed(2);
+    const cgst = +(taxableAmount * 0.045).toFixed(2);
+    const sgst = +(taxableAmount * 0.045).toFixed(2);
     const gstTotal = +(cgst + sgst).toFixed(2);
     const totalAmount = +(taxableAmount + gstTotal).toFixed(2);
     return { subtotal, shippingCharge, taxableAmount, cgst, sgst, gstTotal, totalAmount };

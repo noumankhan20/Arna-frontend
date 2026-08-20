@@ -73,7 +73,7 @@ function RetryPaymentPageContent() {
 
             {/* ✅ Go Back Button */}
             <button
-              onClick={() => router.push("/cart")}
+              onClick={() => router.push("/profile/my-orders")}
               className="w-full bg-red-600 hover:bg-red-700 text-white py-2.5 rounded-lg transition duration-200"
             >
               Go Back to Orders

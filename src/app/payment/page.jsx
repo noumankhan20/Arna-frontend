@@ -30,7 +30,7 @@ function PaymentPageContent() {
 
       } catch (error) {
         console.error("Payment initiation failed:", error);
-        router.replace(`/payment-failed?orderId=${orderId}`);
+        router.replace(`/order-failed?orderId=${orderId}`);
       }
     };
 
