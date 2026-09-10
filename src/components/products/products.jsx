@@ -22,8 +22,7 @@ const ProductsPageContent = () => {
     const desktopHeroImage = heroData?.image
         ? (heroData.image.startsWith('http') ? heroData.image : `${API_BASE_URL}${heroData.image}`)
         : "/Our Products Banner.webp"; // fallback
-    const hasMobileBanner = Boolean(heroData?.mobileImage);
-    const mobileHeroImage = hasMobileBanner
+    const mobileHeroImage = heroData?.mobileImage
         ? (heroData.mobileImage.startsWith('http') ? heroData.mobileImage : `${API_BASE_URL}${heroData.mobileImage}`)
         : desktopHeroImage;
     // console.log("Hero Image URL:", heroImage);
@@ -140,13 +139,7 @@ const ProductsPageContent = () => {
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Header */}
-            <section
-                className={`relative w-full overflow-hidden ${
-                    hasMobileBanner
-                        ? 'aspect-[9/16] md:aspect-auto md:min-h-[360px] flex items-center justify-center p-0 md:pt-24 md:pb-24 md:px-4'
-                        : 'min-h-[280px] md:min-h-[360px] flex items-center justify-center pt-36 pb-16 md:pt-24 md:pb-24 px-4'
-                }`}
-            >
+            <section className="relative w-full min-h-[280px] md:min-h-[360px] flex items-center justify-center pt-36 pb-16 md:pt-24 md:pb-24 px-4 overflow-hidden">
                 {/* Responsive Background Banner */}
                 <picture key={`${desktopHeroImage}-${mobileHeroImage}`} className="absolute inset-0 w-full h-full">
                     {mobileHeroImage && (
@@ -164,16 +157,14 @@ const ProductsPageContent = () => {
                     />
                 </picture>
 
-                {/* Dark overlay: shown on desktop, or on mobile when fallback desktop banner is used */}
-                <div
-                    className={`absolute inset-0 bg-black/35 z-10 ${hasMobileBanner ? 'hidden md:block' : ''}`}
-                    aria-hidden="true"
-                />
+                <div className="absolute inset-0 bg-black/35 z-10" aria-hidden="true" />
 
-                {/* Text overlay: shown on desktop, or on mobile when fallback desktop banner is used */}
-                <div
-                    className={`relative max-w-7xl mx-auto text-center z-20 ${hasMobileBanner ? 'hidden md:block' : ''}`}
-                >
+                <div className="relative max-w-7xl mx-auto text-center z-20">
+                    {/* <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur px-4 py-2 rounded-full mb-6 shadow-sm">
+                        <Leaf className="w-4 h-4 text-[#0A7A4E]" />
+                        <span className="text-sm text-[#0A7A4E] font-bold tracking-wide">{products.length} Premium Products Available</span>
+                    </div> */}
+
                     <h1 className="font-serif text-4xl md:text-6xl text-white font-bold tracking-wider drop-shadow-2xl mb-4">
                         Discover ARNA Products
                     </h1>
@@ -182,11 +173,6 @@ const ProductsPageContent = () => {
                         <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#C9A86A] to-transparent"></div>
                     </div>
                 </div>
-
-                {/* Accessible H1 when mobile banner is active */}
-                {hasMobileBanner && (
-                    <h1 className="sr-only">Discover ARNA Products</h1>
-                )}
             </section>
 
 
