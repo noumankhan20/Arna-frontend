@@ -125,7 +125,7 @@ const Footer = () => {
                     {[
                       { Icon: Facebook, href: "https://www.facebook.com/arnaworld7?rdid=9mz9GEMLIAYLUswZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1Fy6At4Kad%2F" },
                       { Icon: Instagram, href: "https://www.instagram.com/arna.skincare_?igsh=MWY3enB4NDNnZzM2ZQ%3D%3D" },
-                      
+
                     ].map((social, idx) => (
                       <motion.a
                         key={idx}
@@ -177,21 +177,6 @@ const Footer = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="flex flex-wrap gap-6 pt-2">
-                  <div className="flex flex-col items-center gap-2 group cursor-default opacity-60">
-                    <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center">
-                      <Leaf className="w-6 h-6 text-[#c5a059]" />
-                    </div>
-                    <span className="text-[10px] uppercase tracking-widest text-white/40">Pure Herbal</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-2 group cursor-default opacity-60">
-                    <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center">
-                      <Leaf className="w-6 h-6 text-[#c5a059]" />
-                    </div>
-                    <span className="text-[10px] uppercase tracking-widest text-white/40">Cruelty Free</span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -200,7 +185,7 @@ const Footer = () => {
               <div className="flex flex-col md:flex-row justify-between items-center gap-10">
                 {/* Copyright */}
                 <div className="text-[11px] uppercase tracking-[0.3em] text-white/30 text-center md:text-left">
-                  © 2024 ARNA . ALL RIGHTS RESERVED. <br className="md:hidden" />
+                  © 2026 ARNA . ALL RIGHTS RESERVED. <br className="md:hidden" />
                   <span className="hidden md:inline mx-2">|</span>
                   CRAFTED WITH INTENTION FOR CONSCIOUS LIVING 🌿
                 </div>

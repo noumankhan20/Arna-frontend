@@ -19,9 +19,12 @@ const ProductsPageContent = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState(urlSearch);
     const { data: heroData } = useGetProductsHeroQuery();
-    const heroImage = heroData?.image
-        ? `${API_BASE_URL}${heroData.image}`
+    const desktopHeroImage = heroData?.image
+        ? (heroData.image.startsWith('http') ? heroData.image : `${API_BASE_URL}${heroData.image}`)
         : "/Our Products Banner.webp"; // fallback
+    const mobileHeroImage = heroData?.mobileImage
+        ? (heroData.mobileImage.startsWith('http') ? heroData.mobileImage : `${API_BASE_URL}${heroData.mobileImage}`)
+        : desktopHeroImage;
     // console.log("Hero Image URL:", heroImage);
     // Update local states if URL params change
     useEffect(() => {
@@ -136,13 +139,27 @@ const ProductsPageContent = () => {
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Header */}
-            <section
-                className="relative bg-cover bg-center bg-no-repeat pt-36 pb-16 md:pt-24 md:pb-24 px-4"
-                style={{ backgroundImage: `url(${heroImage})` }}
-            >
-                <div className="absolute inset-0 bg-black/10"></div>
+            <section className="relative w-full min-h-[280px] md:min-h-[360px] flex items-center justify-center pt-36 pb-16 md:pt-24 md:pb-24 px-4 overflow-hidden">
+                {/* Responsive Background Banner */}
+                <picture className="absolute inset-0 w-full h-full">
+                    {desktopHeroImage && (
+                        <source
+                            media="(min-width: 768px)"
+                            srcSet={desktopHeroImage}
+                        />
+                    )}
+                    <img
+                        src={mobileHeroImage}
+                        alt="Discover ARNA Products"
+                        className="w-full h-full object-cover object-center"
+                        loading="eager"
+                        decoding="async"
+                    />
+                </picture>
 
-                <div className="relative max-w-7xl mx-auto text-center">
+                <div className="absolute inset-0 bg-black/35 z-10" aria-hidden="true" />
+
+                <div className="relative max-w-7xl mx-auto text-center z-20">
                     {/* <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur px-4 py-2 rounded-full mb-6 shadow-sm">
                         <Leaf className="w-4 h-4 text-[#0A7A4E]" />
                         <span className="text-sm text-[#0A7A4E] font-bold tracking-wide">{products.length} Premium Products Available</span>
@@ -152,13 +169,12 @@ const ProductsPageContent = () => {
                         Discover ARNA Products
                     </h1>
 
-
-
                     <div className="mt-8 flex justify-center">
                         <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#C9A86A] to-transparent"></div>
                     </div>
                 </div>
             </section>
+
 
             {/* Mobile Filter Toggle Button */}
             <div className="lg:hidden sticky top-0 z-40 bg-white border-b border-gray-200 px-4 py-3">

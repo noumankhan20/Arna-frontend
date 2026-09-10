@@ -10,7 +10,7 @@ export const problems = [
 
 export const categories = [
         { id: 'all', label: 'All Products' },
-        { id: 'night-creams', label: 'Night Creams', parent: 'skincare' },
+        // { id: 'night-creams', label: 'Night Creams', parent: 'skincare' },
         { id: 'moisturizers', label: 'Moisturizers', parent: 'skincare' },
         { id: 'face-washes', label: 'Face Washes', parent: 'skincare' },
         { id: 'sunscreens', label: 'Sunscreen', parent: 'skincare' },
