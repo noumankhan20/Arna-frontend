@@ -112,7 +112,7 @@ const Footer = () => {
               <div className="space-y-8">
                 <div className="space-y-4">
                   <Link href="/" className="inline-block">
-                    <h3 className="font-serif text-4xl tracking-widest text-[#b77f6b]">ARNA</h3>
+                    <h3 className="font-serif text-4xl tracking-widest text-[#c5a059]">ARNA</h3>
                   </Link>
                   <p className="text-white/60 text-base leading-relaxed font-light">
                     Elevating your natural beauty through the perfect harmony of ancient wisdom and modern skincare science. Handcrafted with intention in India.
