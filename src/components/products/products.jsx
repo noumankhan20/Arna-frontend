@@ -141,15 +141,15 @@ const ProductsPageContent = () => {
             {/* Hero Header */}
             <section className="relative w-full min-h-[280px] md:min-h-[360px] flex items-center justify-center pt-36 pb-16 md:pt-24 md:pb-24 px-4 overflow-hidden">
                 {/* Responsive Background Banner */}
-                <picture className="absolute inset-0 w-full h-full">
-                    {desktopHeroImage && (
+                <picture key={`${desktopHeroImage}-${mobileHeroImage}`} className="absolute inset-0 w-full h-full">
+                    {mobileHeroImage && (
                         <source
-                            media="(min-width: 768px)"
-                            srcSet={desktopHeroImage}
+                            media="(max-width: 767px)"
+                            srcSet={mobileHeroImage}
                         />
                     )}
                     <img
-                        src={mobileHeroImage}
+                        src={desktopHeroImage}
                         alt="Discover ARNA Products"
                         className="w-full h-full object-cover object-center"
                         loading="eager"
