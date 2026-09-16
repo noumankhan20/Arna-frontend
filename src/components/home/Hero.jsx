@@ -41,6 +41,11 @@ export default function Hero() {
 
   useEffect(() => {
     if (apiData?.success && apiData?.data?.length > 0) {
+      const isVideoUrl = (url) => {
+        if (!url) return false;
+        return /\.(mp4|webm|mov|ogg)($|\?)/i.test(url);
+      };
+
       // Map API data to slide format
       const backendSlides = apiData.data.map((slide, index) => {
         // Handle image URL robustly
@@ -54,12 +59,16 @@ export default function Hero() {
           mobileImageUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000'}${mobileImageUrl}`;
         }
 
+        const desktopIsVideo = slide.mediaType === 'video' || isVideoUrl(slide.imageUrl);
+        const mobileIsVideo = slide.mobileMediaType === 'video' || isVideoUrl(slide.mobileImageUrl);
+
         return {
           image: imageUrl,
           mobileImage: mobileImageUrl || imageUrl, // Fallback ONLY to the main CMS image, no more hardcoded banners
           title: slide.title || '',
           text: slide.description || '',
-          mediaType: slide.mediaType || 'image'
+          mediaType: desktopIsVideo ? 'video' : 'image',
+          mobileMediaType: mobileIsVideo ? 'video' : (mobileImageUrl ? 'image' : (desktopIsVideo ? 'video' : 'image'))
         };
       });
 
@@ -217,37 +226,51 @@ export default function Hero() {
               onMouseLeave={() => setManualPause(false)}
               onClick={togglePause}
             >
-              {slide.mediaType === 'video' ? (
-                <video
-                  src={slide.image}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover object-center"
-                  onLoadedData={() => setLoaded(true)}
-                />
-              ) : (
-                <>
-                  <picture className="w-full h-full block">
-                    {/* Mobile image: shown on screens narrower than 768px */}
-                    {slide.mobileImage && (
-                      <source
-                        media="(max-width: 767px)"
-                        srcSet={slide.mobileImage}
-                      />
-                    )}
-                    {/* Desktop image: default fallback */}
-                    <img
-                      src={slide.image}
-                      alt={slide.title}
-                      className="w-full h-full object-cover object-right-top md:object-right-top object-center"
-                      onLoad={() => setLoaded(true)}
-                      onError={() => setLoaded(true)}
-                    />
-                  </picture>
-                </>
-              )}
+              {/* Mobile Viewport (< 768px) */}
+              <div className="block md:hidden w-full h-full">
+                {slide.mobileMediaType === 'video' ? (
+                  <video
+                    src={slide.mobileImage}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover object-center"
+                    onLoadedData={() => setLoaded(true)}
+                  />
+                ) : (
+                  <img
+                    src={slide.mobileImage}
+                    alt={slide.title}
+                    className="w-full h-full object-cover object-center"
+                    onLoad={() => setLoaded(true)}
+                    onError={() => setLoaded(true)}
+                  />
+                )}
+              </div>
+
+              {/* Desktop Viewport (>= 768px) */}
+              <div className="hidden md:block w-full h-full">
+                {slide.mediaType === 'video' ? (
+                  <video
+                    src={slide.image}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover object-center"
+                    onLoadedData={() => setLoaded(true)}
+                  />
+                ) : (
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className="w-full h-full object-cover object-right-top md:object-right-top object-center"
+                    onLoad={() => setLoaded(true)}
+                    onError={() => setLoaded(true)}
+                  />
+                )}
+              </div>
 
               <div className="absolute inset-0 bg-gradient-to-br from-[#14422c]/40 via-transparent to-black/50" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
