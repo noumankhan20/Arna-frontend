@@ -165,9 +165,9 @@ const ProductsPageContent = () => {
                         <span className="text-sm text-[#0A7A4E] font-bold tracking-wide">{products.length} Premium Products Available</span>
                     </div> */}
 
-                    <h1 className="font-serif text-4xl md:text-6xl text-white font-bold tracking-wider drop-shadow-2xl mb-4">
+                    {/* <h1 className="font-serif text-4xl md:text-6xl text-white font-bold tracking-wider drop-shadow-2xl mb-4">
                         Discover ARNA Products
-                    </h1>
+                    </h1> */}
 
                     <div className="mt-8 flex justify-center">
                         <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#C9A86A] to-transparent"></div>
